@@ -1,42 +1,435 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* ================================================
+   DOUGHBY LANDING PAGE
+   ================================================ */
+
+/* ----- Page Layout ----- */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ----- Ambient Background ----- */
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-1 {
+  width: 420px;
+  height: 420px;
+  background: var(--color-secondary);
+  top: -120px;
+  right: -120px;
+  opacity: 0.35;
+  animation: drift 22s ease-in-out infinite;
+}
+
+.bg-blob-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--color-primary);
+  bottom: -100px;
+  left: -100px;
+  opacity: 0.15;
+  animation: drift 28s ease-in-out infinite reverse;
+}
+
+.bg-blob-3 {
+  width: 220px;
+  height: 220px;
+  background: var(--color-accent);
+  top: 45%;
+  left: 8%;
+  opacity: 0.12;
+  animation: drift 18s ease-in-out infinite 4s;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -25px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ----- Hero Section ----- */
+
+.hero {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Character ----- */
+
+.character-wrapper {
+  position: relative;
+  margin-bottom: -24px;
+  z-index: 2;
+  display: inline-block;
+  animation: fadeInDown 0.7s ease both;
+}
+
+.character-glow {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  border-radius: 50%;
+  filter: blur(24px);
+}
+
+.character {
+  width: 148px;
+  height: 148px;
+  object-fit: contain;
+  position: relative;
+  filter: drop-shadow(0 10px 28px rgba(91, 123, 106, 0.25));
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ----- Card ----- */
+
+.card {
+  background: var(--color-surface);
+  padding: 52px 44px 44px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+/* Decorative blobs inside card */
+.card-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-blob-1 {
+  width: 180px;
+  height: 180px;
+  background: var(--color-secondary);
+  top: -70px;
+  right: -70px;
+  opacity: 0.12;
+}
+
+.card-blob-2 {
+  width: 140px;
+  height: 140px;
+  background: var(--color-primary);
+  bottom: -50px;
+  left: -50px;
+  opacity: 0.06;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Typography ----- */
+
+.title {
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  animation: fadeInUp 0.5s ease 0.25s both;
+}
+
+.title-accent {
+  color: var(--color-primary);
+}
+
+.subtitle {
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.5s ease 0.35s both;
+}
+
+/* ----- Features ----- */
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+  text-align: left;
+  animation: fadeInUp 0.5s ease 0.4s both;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  margin-bottom: 1px;
+}
+
+.feature-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* ----- Form ----- */
+
+.form-section {
+  animation: fadeInUp 0.5s ease 0.5s both;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 15px 18px 15px 48px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--color-background);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+
+.button {
+  padding: 15px 26px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: white;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 18px;
+}
+
+.form-fine-print {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 16px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ----- Success State ----- */
+
+.success-state {
+  padding: 28px 24px;
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 0.5s ease;
 }
 
-@keyframes logo-spin {
+.success-state svg {
+  color: var(--color-success);
+}
+
+.success-state h2 {
+  font-size: 1.3rem;
+  color: var(--color-success);
+  letter-spacing: -0.02em;
+}
+
+.success-state p {
+  font-size: 0.95rem;
+}
+
+/* ----- Footer ----- */
+
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer p {
+  color: var(--color-text-muted);
+}
+
+/* ----- Animations ----- */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeInUp {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(24px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* ----- Responsive ----- */
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 600px) {
+  .page {
+    padding: 20px 16px;
+  }
+
+  .card {
+    padding: 44px 24px 32px;
+    border-radius: var(--radius-md);
+  }
+
+  .form {
+    flex-direction: column;
+  }
+
+  .input {
+    padding: 16px 18px 16px 48px;
+  }
+
+  .button {
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .character {
+    width: 120px;
+    height: 120px;
+  }
+
+  .feature {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
 }

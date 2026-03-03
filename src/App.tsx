@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from './lib/supabase';
-import { Mail, CheckCircle2, ArrowRight, Thermometer, Heart, Globe } from 'lucide-react';
-import './index.css';
+import { Mail, CheckCircle2, ArrowRight, Timer, Heart, Globe } from 'lucide-react';
+import './App.css';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -35,146 +35,94 @@ function App() {
     }
   };
 
-  const features = [
-    { icon: <Thermometer size={28} />, title: 'Track Feedings', desc: 'Log every feed and watch your starter thrive' },
-    { icon: <Heart size={28} />, title: 'Monitor Health', desc: 'Know exactly when your starter needs attention' },
-    { icon: <Globe size={28} />, title: 'Map Your Lineage', desc: "Explore the Doughverse and trace your starter's family tree" },
-  ];
-
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', minHeight: '100vh' }}>
-      
-      <main style={{
-        maxWidth: '520px',
-        width: '100%',
-        textAlign: 'center',
-        position: 'relative',
-      }}>
-        {/* Doughby Character */}
-        <div style={{ marginBottom: '-20px', position: 'relative', zIndex: 2 }}>
-          <img 
-            src="/doughby-character.png" 
-            alt="Doughby" 
-            style={{ 
-              width: '160px', 
-              height: '160px', 
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 8px 24px rgba(124, 154, 139, 0.3))',
-              animation: 'float 3s ease-in-out infinite',
-            }} 
-          />
+    <div className="page">
+      <div className="bg-blob bg-blob-1" />
+      <div className="bg-blob bg-blob-2" />
+      <div className="bg-blob bg-blob-3" />
+
+      <main className="hero">
+        <div className="character-wrapper">
+          <div className="character-glow" />
+          <img src="/doughby-character.png" alt="Doughby" className="character" />
         </div>
 
-        {/* Main Card */}
-        <div style={{
-          backgroundColor: 'var(--color-surface)',
-          padding: '48px 32px 40px',
-          borderRadius: 'var(--radius-lg)',
-          boxShadow: 'var(--shadow-lg)',
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          {/* Decorative blobs */}
-          <div style={{
-            position: 'absolute', top: '-60px', right: '-60px',
-            width: '160px', height: '160px',
-            backgroundColor: 'var(--color-secondary)', borderRadius: '50%',
-            opacity: 0.15, zIndex: 0
-          }} />
-          <div style={{
-            position: 'absolute', bottom: '-40px', left: '-40px',
-            width: '120px', height: '120px',
-            backgroundColor: 'var(--color-primary)', borderRadius: '50%',
-            opacity: 0.08, zIndex: 0
-          }} />
+        <div className="card">
+          <div className="card-blob card-blob-1" />
+          <div className="card-blob card-blob-2" />
 
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <h1 style={{ fontSize: '2.2rem', marginBottom: '12px', color: 'var(--color-primary)', lineHeight: 1.2 }}>
-              Your sourdough starter is alive.
+          <div className="card-content">
+            <h1 className="title">
+              Your sourdough starter<br />is <span className="title-accent">alive.</span>
             </h1>
-            <p style={{ fontSize: '1.15rem', marginBottom: '32px', lineHeight: 1.6 }}>
-              Doughby helps you keep it that way. A cozy companion app for feeding schedules, starter health, and exploring your sourdough's family tree.
+            <p className="subtitle">
+              Doughby helps you keep it that way. A cozy companion for feeding
+              schedules, starter health, and exploring your sourdough's family tree.
             </p>
 
-            {/* Features */}
-            <div style={{ 
-              display: 'flex', 
-              gap: '16px', 
-              marginBottom: '32px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}>
-              {features.map((f, i) => (
-                <div key={i} style={{
-                  flex: '1 1 130px',
-                  maxWidth: '150px',
-                  padding: '16px 12px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--color-background)',
-                }}>
-                  <div style={{ color: 'var(--color-primary)', marginBottom: '8px' }}>{f.icon}</div>
-                  <div style={{ fontWeight: 700, fontSize: '0.85rem', marginBottom: '4px', color: 'var(--color-text-primary)' }}>{f.title}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>{f.desc}</div>
+            <div className="features">
+              <div className="feature">
+                <div className="feature-icon"><Timer size={20} /></div>
+                <div>
+                  <div className="feature-title">Track Feedings</div>
+                  <div className="feature-desc">Log every feed and watch your starter thrive</div>
                 </div>
-              ))}
+              </div>
+              <div className="feature">
+                <div className="feature-icon"><Heart size={20} /></div>
+                <div>
+                  <div className="feature-title">Monitor Health</div>
+                  <div className="feature-desc">Know exactly when your starter needs attention</div>
+                </div>
+              </div>
+              <div className="feature">
+                <div className="feature-icon"><Globe size={20} /></div>
+                <div>
+                  <div className="feature-title">Map Your Lineage</div>
+                  <div className="feature-desc">Trace your starter's family tree in the Doughverse</div>
+                </div>
+              </div>
             </div>
 
-            {/* Waitlist Form */}
             {status === 'success' ? (
-              <div style={{
-                backgroundColor: 'var(--color-background)',
-                padding: '24px',
-                borderRadius: 'var(--radius-md)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '12px'
-              }}>
-                <CheckCircle2 size={48} color="var(--color-success)" />
-                <h2 style={{ fontSize: '1.4rem', color: 'var(--color-success)' }}>You're on the list!</h2>
-                <p style={{ fontSize: '0.95rem' }}>We'll let you know when Doughby is ready.</p>
+              <div className="success-state">
+                <CheckCircle2 size={44} />
+                <h2>You're on the list!</h2>
+                <p>We'll let you know when Doughby is ready to rise.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={20} color="var(--color-text-secondary)" style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)' }} />
-                  <input
-                    type="email"
-                    className="input"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={status === 'loading'}
-                    style={{ paddingLeft: '52px' }}
-                  />
-                </div>
-
+              <div className="form-section">
+                <form onSubmit={handleSubmit} className="form">
+                  <div className="input-wrapper">
+                    <Mail size={18} className="input-icon" />
+                    <input
+                      type="email"
+                      className="input"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      disabled={status === 'loading'}
+                    />
+                  </div>
+                  <button type="submit" className="button" disabled={status === 'loading'}>
+                    {status === 'loading' ? 'Joining...' : 'Join the Waitlist'}
+                    {status !== 'loading' && <ArrowRight size={18} />}
+                  </button>
+                </form>
                 {status === 'error' && (
-                  <p style={{ color: 'var(--color-danger)', fontSize: '0.85rem', textAlign: 'left', paddingLeft: '16px' }}>
-                    {errorMessage}
-                  </p>
+                  <p className="error-message">{errorMessage}</p>
                 )}
-
-                <button 
-                  type="submit" 
-                  className="button" 
-                  disabled={status === 'loading'}
-                  style={{ width: '100%' }}
-                >
-                  {status === 'loading' ? 'Joining...' : 'Join the Waitlist'}
-                  {status !== 'loading' && <ArrowRight size={20} />}
-                </button>
-                <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: '4px' }}>
+                <p className="form-fine-print">
                   Free to join. We'll only email you when it's ready.
                 </p>
-              </form>
+              </div>
             )}
           </div>
         </div>
       </main>
 
-      <footer style={{ marginTop: '48px', textAlign: 'center', color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
+      <footer className="footer">
         <p>&copy; {new Date().getFullYear()} AIpplied Labs</p>
       </footer>
     </div>
